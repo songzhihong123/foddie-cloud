@@ -12,6 +12,11 @@
         <module>common/foddie-cloud-shared-pojo</module>
         <module>platform/registry-center</module>
         <module>common/foddie-cloud-web-components</module>
+        <module>domain/item/foddie-item-pojo</module>
+        <module>domain/item/foddie-item-mapper</module>
+        <module>domain/item/foddie-item-api</module>
+        <module>domain/item/foddie-item-service</module>
+        <module>domain/item/foddie-item-web</module>
     </modules>
 
     <packaging>pom</packaging>

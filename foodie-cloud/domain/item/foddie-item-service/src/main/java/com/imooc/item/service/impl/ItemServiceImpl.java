@@ -1,31 +1,32 @@
-package com.imooc.service.impl;
+package com.imooc.item.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.imooc.enums.CommentLevel;
-import com.imooc.mapper.*;
-import com.imooc.pojo.*;
-import com.imooc.service.ItemService;
-import com.imooc.utils.DesensitizationUtil;
-import com.imooc.utils.PagedGridResult;
-import com.imooc.pojo.vo.CommentLevelCountsVO;
-import com.imooc.pojo.vo.ItemCommentVO;
-import com.imooc.pojo.vo.SearchItemsVO;
-import com.imooc.pojo.vo.ShopcartVO;
+import com.imooc.item.mapper.*;
+import com.imooc.item.pojo.*;
+import com.imooc.item.pojo.vo.CommentLevelCountsVO;
+import com.imooc.item.pojo.vo.ItemCommentVO;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
+import com.imooc.item.pojo.vo.ShopcartVO;
+import com.imooc.item.service.ItemService;
+import com.imooc.pojo.PagedGridResult;
+import com.imooc.utils.DesensitizationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-@Service
+@RestController
+@Slf4j
 public class ItemServiceImpl implements ItemService {
 
     private Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
@@ -115,7 +116,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public PagedGridResult queryPagedCommonts(String itemId, Integer level,Integer page,Integer pageSize) {
+    public PagedGridResult queryPagedCommonts(String itemId, Integer level, Integer page, Integer pageSize) {
         Map<String,Object> map = new HashMap<>();
         map.put("itemId",itemId);
         map.put("level",level);
@@ -131,29 +132,6 @@ public class ItemServiceImpl implements ItemService {
         return setPagedGrid(result,page);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
-    @Override
-    public PagedGridResult searchItems(String keywords, String sort, Integer page, Integer pageSize) {
-        Map<String,Object> map = new HashMap<>();
-        map.put("keywords",keywords);
-        map.put("sort",sort);
-
-        PageHelper.startPage(page,pageSize);
-        List<SearchItemsVO> list = itemsMapperCustom.searchItems(map);
-        return setPagedGrid(list,page);
-    }
-
-    @Transactional(propagation = Propagation.SUPPORTS)
-    @Override
-    public PagedGridResult searchItems(Integer catId, String sort, Integer page, Integer pageSize) {
-        Map<String,Object> map = new HashMap<>();
-        map.put("catId",catId);
-        map.put("sort",sort);
-
-        PageHelper.startPage(page,pageSize);
-        List<SearchItemsVO> list = itemsMapperCustom.searchItemsByThirdCat(map);
-        return setPagedGrid(list,page);
-    }
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override

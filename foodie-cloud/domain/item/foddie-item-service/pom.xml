@@ -12,9 +12,22 @@
 
     <artifactId>foddie-item-service</artifactId>
 
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+   <dependencies>
+       <dependency>
+           <groupId>${project.groupId}</groupId>
+           <artifactId>foddie-item-api</artifactId>
+           <version>${project.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>${project.groupId}</groupId>
+           <artifactId>foddie-item-mapper</artifactId>
+           <version>${project.version}</version>
+       </dependency>
+       <dependency>
+           <groupId>org.redisson</groupId>
+           <artifactId>redisson-spring-boot-starter</artifactId>
+           <version>3.12.0</version>
+       </dependency>
+   </dependencies>
 
 </project>

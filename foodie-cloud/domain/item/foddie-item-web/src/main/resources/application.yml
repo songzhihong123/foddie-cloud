@@ -11,9 +11,12 @@ server:
 ############################################################
 #
 # 配置数据源信息
+# !!! 更改applicationname
 #
 ############################################################
 spring:
+  application:
+    name: foddie-item-service
   profiles:
     active: dev
   datasource:                                           # 数据源的相关配置
@@ -42,10 +45,11 @@ spring:
 ############################################################
 #
 # mybatis 配置
+# !!!  更改路径
 #
 ############################################################
 mybatis:
-  type-aliases-package: com.imooc.pojo          # 所有POJO类所在包路径
+  type-aliases-package: com.imooc.item.pojo          # 所有POJO类所在包路径
   mapper-locations: classpath:mapper/*.xml      # mapper映射文件
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

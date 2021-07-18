@@ -1,9 +1,9 @@
-package org.n3r.idworker;
-
-import java.security.SecureRandom;
+package com.imooc.org.n3r.idworker;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.security.SecureRandom;
 
 public class IdWorker {
     protected long epoch = 1288834974657L;

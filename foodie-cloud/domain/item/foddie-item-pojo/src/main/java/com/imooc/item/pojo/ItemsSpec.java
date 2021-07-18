@@ -1,6 +1,8 @@
-package com.imooc.pojo;
+package com.imooc.item.pojo;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
 

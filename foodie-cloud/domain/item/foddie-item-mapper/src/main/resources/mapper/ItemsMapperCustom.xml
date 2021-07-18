@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.imooc.mapper.ItemsMapperCustom" >
+<mapper namespace="com.imooc.item.mapper.ItemsMapperCustom" >
 
 
-    <select id="queryItemComments" parameterType="Map" resultType="com.imooc.pojo.vo.ItemCommentVO">
+    <select id="queryItemComments" parameterType="Map" resultType="com.imooc.item.pojo.vo.ItemCommentVO">
         SELECT
         ic.comment_level AS commentLevel,
         ic.content AS content,
@@ -26,7 +26,7 @@
     </select>
 
 
-    <select id="searchItems" parameterType="Map" resultType="com.imooc.pojo.vo.SearchItemsVO">
+    <!--<select id="searchItems" parameterType="Map" resultType="com.imooc.item.pojo.vo.SearchItemsVO">
         SELECT
         i.id AS itemId,
         i.item_name AS itemName,
@@ -62,7 +62,7 @@
     </select>
 
 
-    <select id="searchItemsByThirdCat" parameterType="Map" resultType="com.imooc.pojo.vo.SearchItemsVO">
+    <select id="searchItemsByThirdCat" parameterType="Map" resultType="com.imooc.item.pojo.vo.SearchItemsVO">
         SELECT
         i.id AS itemId,
         i.item_name AS itemName,
@@ -94,9 +94,9 @@
                 i.item_name asc
             </otherwise>
         </choose>
-    </select>
+    </select>-->
     
-    <select id="queryItemsBySpecIds" parameterType="List" resultType="com.imooc.pojo.vo.ShopcartVO">
+    <select id="queryItemsBySpecIds" parameterType="List" resultType="com.imooc.item.pojo.vo.ShopcartVO">
         SELECT
 		t_items.id AS itemId,
 		t_items.item_name AS itemName,

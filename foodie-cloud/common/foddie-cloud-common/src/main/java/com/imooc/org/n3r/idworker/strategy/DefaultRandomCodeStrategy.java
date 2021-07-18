@@ -1,4 +1,4 @@
-package org.n3r.idworker.strategy;
+package com.imooc.org.n3r.idworker.strategy;
 
 import org.n3r.idworker.Id;
 import org.n3r.idworker.RandomCodeStrategy;

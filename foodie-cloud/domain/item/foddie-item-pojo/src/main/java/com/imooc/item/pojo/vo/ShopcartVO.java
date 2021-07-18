@@ -1,4 +1,4 @@
-package com.imooc.pojo.vo;
+package com.imooc.item.pojo.vo;
 
 public class ShopcartVO {
 

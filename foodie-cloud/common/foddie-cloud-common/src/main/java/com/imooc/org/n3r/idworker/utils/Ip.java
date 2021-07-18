@@ -1,4 +1,4 @@
-package org.n3r.idworker.utils;
+package com.imooc.org.n3r.idworker.utils;
 
 
 import org.slf4j.Logger;

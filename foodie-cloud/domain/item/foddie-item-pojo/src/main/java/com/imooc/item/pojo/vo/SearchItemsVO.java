@@ -1,4 +1,4 @@
-package com.imooc.pojo.vo;
+package com.imooc.item.pojo.vo;
 
 /**
  * 用于展示商品搜索列表结果的VO

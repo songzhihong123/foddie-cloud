@@ -7,10 +7,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="foddie-item-mapper" />
         <module name="foddie-cloud-common" />
         <module name="foddie-cloud-shared-pojo" />
+        <module name="foddie-item-web" />
         <module name="registry-center" />
         <module name="foddie-cloud-web-components" />
+        <module name="foddie-item-pojo" />
+        <module name="foddie-item-service" />
+        <module name="foddie-item-api" />
       </profile>
     </annotationProcessing>
   </component>

@@ -1,9 +1,9 @@
 package com.imooc.item.pojo.vo;
 
-import com.imooc.pojo.Items;
-import com.imooc.pojo.ItemsImg;
-import com.imooc.pojo.ItemsParam;
-import com.imooc.pojo.ItemsSpec;
+import com.imooc.item.pojo.Items;
+import com.imooc.item.pojo.ItemsImg;
+import com.imooc.item.pojo.ItemsParam;
+import com.imooc.item.pojo.ItemsSpec;
 
 import java.util.List;
 

@@ -1,15 +1,16 @@
-package com.imooc.controller;
+package com.imooc.item.controller;
 
-import com.imooc.pojo.Items;
-import com.imooc.pojo.ItemsImg;
-import com.imooc.pojo.ItemsParam;
-import com.imooc.pojo.ItemsSpec;
-import com.imooc.service.ItemService;
-import com.imooc.utils.IMOOCJSONResult;
-import com.imooc.utils.PagedGridResult;
-import com.imooc.pojo.vo.CommentLevelCountsVO;
-import com.imooc.pojo.vo.ItemInfoVO;
-import com.imooc.pojo.vo.ShopcartVO;
+import com.imooc.controller.BaseController;
+import com.imooc.item.pojo.Items;
+import com.imooc.item.pojo.ItemsImg;
+import com.imooc.item.pojo.ItemsParam;
+import com.imooc.item.pojo.ItemsSpec;
+import com.imooc.item.pojo.vo.CommentLevelCountsVO;
+import com.imooc.item.pojo.vo.ItemInfoVO;
+import com.imooc.item.pojo.vo.ShopcartVO;
+import com.imooc.item.service.ItemService;
+import com.imooc.pojo.IMOOCJSONResult;
+import com.imooc.pojo.PagedGridResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -22,7 +23,7 @@ import java.util.List;
 @Api(value = "商品接口",tags = {"商品信息展示的相关接口"})
 @RestController
 @RequestMapping("items")
-public class ItemsController extends BaseController{
+public class ItemsController extends BaseController {
 
     @Autowired
     private ItemService itemService;
@@ -84,56 +85,6 @@ public class ItemsController extends BaseController{
         }
         PagedGridResult gridResult = itemService.queryPagedCommonts(itemId, level, page, pageSize);
         return IMOOCJSONResult.ok(gridResult);
-    }
-
-    @ApiOperation(value = "搜索商品列表",notes = "搜索商品列表",httpMethod = "GET")
-    @GetMapping("/search")
-    public IMOOCJSONResult search(
-            @ApiParam(name = "keywords",value = "关键字",required = true)
-            @RequestParam String keywords,
-            @ApiParam(name = "sort",value = "排序",required = false)
-            @RequestParam String sort,
-            @ApiParam(name = "page",value = "查询下一页的第几页",required = false)
-            @RequestParam Integer page,
-            @ApiParam(name = "pageSize",value = "分页的每一页显示的记录数",required = false)
-            @RequestParam Integer pageSize){
-        if(StringUtils.isBlank(keywords)){
-            return IMOOCJSONResult.errorMsg(null);
-        }
-        if (page == null){
-            page = 1;
-        }
-        if (pageSize == null){
-            pageSize = PAGE_SIZE;
-        }
-        PagedGridResult gridResult = itemService.searchItems(keywords,sort,page,pageSize);
-        return IMOOCJSONResult.ok(gridResult);
-
-    }
-
-    @ApiOperation(value = "通过分类ID搜索商品列表",notes = "通过分类ID搜索商品列表",httpMethod = "GET")
-    @GetMapping("/catItems")
-    public IMOOCJSONResult catItems(
-            @ApiParam(name = "catId",value = "三级分类ID",required = true)
-            @RequestParam Integer catId,
-            @ApiParam(name = "sort",value = "排序",required = false)
-            @RequestParam String sort,
-            @ApiParam(name = "page",value = "查询下一页的第几页",required = false)
-            @RequestParam Integer page,
-            @ApiParam(name = "pageSize",value = "分页的每一页显示的记录数",required = false)
-            @RequestParam Integer pageSize){
-        if(catId == null){
-            return IMOOCJSONResult.errorMsg(null);
-        }
-        if (page == null){
-            page = 1;
-        }
-        if (pageSize == null){
-            pageSize = PAGE_SIZE;
-        }
-        PagedGridResult gridResult = itemService.searchItems(catId,sort,page,pageSize);
-        return IMOOCJSONResult.ok(gridResult);
-
     }
 
 
