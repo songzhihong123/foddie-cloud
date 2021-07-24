@@ -22,6 +22,11 @@
         <module>domain/user/foddie-user-api</module>
         <module>domain/user/foddie-user-service</module>
         <module>domain/user/foddie-user-web</module>
+        <module>domain/order/foddie-order-pojo</module>
+        <module>domain/order/foddie-order-mapper</module>
+        <module>domain/order/foddie-order-api</module>
+        <module>domain/order/foddie-order-service</module>
+        <module>domain/order/foddie-order-web</module>
     </modules>
 
     <packaging>pom</packaging>

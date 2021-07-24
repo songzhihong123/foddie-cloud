@@ -107,7 +107,7 @@ public interface ItemService {
      * @param specId
      * @return
      */
-    @GetMapping("itemSpec")
+    @GetMapping("singleItemSpec")
     public ItemsSpec queryItemSpecById(@RequestParam("specId") String specId);
 
 

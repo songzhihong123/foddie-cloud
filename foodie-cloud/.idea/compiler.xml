@@ -13,12 +13,17 @@
         <module name="foddie-user-api" />
         <module name="registry-center" />
         <module name="foddie-item-pojo" />
+        <module name="foddie-order-web" />
+        <module name="foddie-order-pojo" />
+        <module name="foddie-order-service" />
         <module name="foddie-cloud-common" />
+        <module name="foddie-order-mapper" />
         <module name="foddie-user-pojo" />
         <module name="foddie-user-mapper" />
         <module name="foddie-item-web" />
         <module name="foddie-cloud-web-components" />
         <module name="foddie-item-service" />
+        <module name="foddie-order-api" />
         <module name="foddie-item-api" />
         <module name="foddie-user-web" />
       </profile>

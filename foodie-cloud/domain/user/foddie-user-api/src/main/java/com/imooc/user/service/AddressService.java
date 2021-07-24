@@ -60,7 +60,7 @@ public interface AddressService {
      * @param addressId
      * @return
      */
-    @GetMapping("queryUserAddres")
+    @GetMapping("queryAddres")
     public UserAddress queryUserAddress(@RequestParam("userId") String userId,
                                         @RequestParam(value = "addressId" , required = false) String addressId);
 

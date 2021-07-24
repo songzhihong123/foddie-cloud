@@ -17,6 +17,16 @@
     <file url="file://$PROJECT_DIR$/domain/item/foddie-item-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/domain/item/foddie-item-web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/domain/item/foddie-item-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-mapper/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-mapper/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-pojo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-pojo/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-web/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/domain/order/foddie-order-web/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/domain/user/foddie-user-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/domain/user/foddie-user-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/domain/user/foddie-user-mapper/src/main/java" charset="UTF-8" />
