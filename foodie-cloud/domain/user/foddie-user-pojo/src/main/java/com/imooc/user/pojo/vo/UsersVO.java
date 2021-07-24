@@ -1,6 +1,4 @@
-package com.imooc.pojo.vo;
-
-import java.util.Date;
+package com.imooc.user.pojo.vo;
 
 public class UsersVO {
 

@@ -1,4 +1,4 @@
-package com.imooc.pojo.bo;
+package com.imooc.user.pojo.bo;
 
 /**
  * 用于新增或修改地址的BO

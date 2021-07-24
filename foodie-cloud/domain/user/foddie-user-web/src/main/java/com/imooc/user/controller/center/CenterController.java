@@ -1,8 +1,8 @@
-package com.imooc.center;
+package com.imooc.user.controller.center;
 
-import com.imooc.pojo.Users;
-import com.imooc.service.center.CenterUserService;
-import com.imooc.utils.IMOOCJSONResult;
+import com.imooc.user.pojo.Users;
+import com.imooc.user.service.center.CenterUserService;
+import com.imooc.pojo.IMOOCJSONResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

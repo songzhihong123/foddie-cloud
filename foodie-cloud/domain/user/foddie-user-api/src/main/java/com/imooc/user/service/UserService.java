@@ -1,8 +1,10 @@
-package com.imooc.service;
+package com.imooc.user.service;
 
-import com.imooc.pojo.bo.UserBO;
-import com.imooc.pojo.Users;
+import com.imooc.user.pojo.Users;
+import com.imooc.user.pojo.bo.UserBO;
+import org.springframework.web.bind.annotation.*;
 
+@RequestMapping("user-api")
 public interface UserService {
 
 
@@ -11,14 +13,16 @@ public interface UserService {
      * @param username
      * @return
      */
-    public boolean queryUsernameIsExist(String username);
+    @GetMapping("/user/exists")
+    public boolean queryUsernameIsExist(@RequestParam("username") String username);
 
     /**
      * 创建用户.
      * @param userBO
      * @return
      */
-    public Users createUser(UserBO userBO);
+    @PostMapping("user")
+    public Users createUser(@RequestBody UserBO userBO);
 
 
     /**
@@ -27,7 +31,9 @@ public interface UserService {
      * @param password
      * @return
      */
-    public Users queryUsersForLogin(String username,String password);
+    @GetMapping("verify")
+    public Users queryUsersForLogin(@RequestParam("username") String username,
+                                    @RequestParam("password") String password);
 
 
 }

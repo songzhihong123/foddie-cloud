@@ -1,8 +1,10 @@
-package com.imooc.service.center;
+package com.imooc.user.service.center;
 
-import com.imooc.pojo.bo.center.CenterUsersBO;
-import com.imooc.pojo.Users;
+import com.imooc.user.pojo.Users;
+import com.imooc.user.pojo.bo.center.CenterUsersBO;
+import org.springframework.web.bind.annotation.*;
 
+@RequestMapping("center-user-api")
 public interface CenterUserService {
 
 
@@ -11,7 +13,8 @@ public interface CenterUserService {
      * @param userId
      * @return
      */
-    public Users queryUserInfo(String userId);
+    @GetMapping("profile")
+    public Users queryUserInfo(@RequestParam("userId") String userId);
 
 
     /**
@@ -19,15 +22,19 @@ public interface CenterUserService {
      * @param userId
      * @param centerUsersBO
      */
-    public Users updateUserInfo(String userId, CenterUsersBO centerUsersBO);
+    @PutMapping("profile/{userId}")
+    public Users updateUserInfo(@PathVariable("userId") String userId,
+                                @RequestBody CenterUsersBO centerUsersBO);
 
 
     /**
      * 用户头像更新.
      * @param userId
-     * @param centerUsersBO
+     * @param faceUrl
      */
-    public Users updateUserFace(String userId, String faceUrl);
+    @PostMapping("updatePhoto")
+    public Users updateUserFace(@RequestParam("userId") String userId,
+                                @RequestParam("faceUrl") String faceUrl);
 
 
 

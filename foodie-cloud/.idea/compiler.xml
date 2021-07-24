@@ -8,14 +8,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="foddie-item-mapper" />
-        <module name="foddie-cloud-common" />
         <module name="foddie-cloud-shared-pojo" />
-        <module name="foddie-item-web" />
+        <module name="foddie-user-service" />
+        <module name="foddie-user-api" />
         <module name="registry-center" />
-        <module name="foddie-cloud-web-components" />
         <module name="foddie-item-pojo" />
+        <module name="foddie-cloud-common" />
+        <module name="foddie-user-pojo" />
+        <module name="foddie-user-mapper" />
+        <module name="foddie-item-web" />
+        <module name="foddie-cloud-web-components" />
         <module name="foddie-item-service" />
         <module name="foddie-item-api" />
+        <module name="foddie-user-web" />
       </profile>
     </annotationProcessing>
   </component>

@@ -17,6 +17,11 @@
         <module>domain/item/foddie-item-api</module>
         <module>domain/item/foddie-item-service</module>
         <module>domain/item/foddie-item-web</module>
+        <module>domain/user/foddie-user-pojo</module>
+        <module>domain/user/foddie-user-mapper</module>
+        <module>domain/user/foddie-user-api</module>
+        <module>domain/user/foddie-user-service</module>
+        <module>domain/user/foddie-user-web</module>
     </modules>
 
     <packaging>pom</packaging>

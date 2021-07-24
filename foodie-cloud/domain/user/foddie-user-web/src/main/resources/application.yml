@@ -16,7 +16,7 @@ server:
 ############################################################
 spring:
   application:
-    name: foddie-item-service
+    name: foddie-user-service
   profiles:
     active: dev
   datasource:                                           # 数据源的相关配置
@@ -49,7 +49,7 @@ spring:
 #
 ############################################################
 mybatis:
-  type-aliases-package: com.imooc.item.pojo          # 所有POJO类所在包路径
+  type-aliases-package: com.imooc.user.pojo          # 所有POJO类所在包路径
   mapper-locations: classpath:mapper/*.xml      # mapper映射文件
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

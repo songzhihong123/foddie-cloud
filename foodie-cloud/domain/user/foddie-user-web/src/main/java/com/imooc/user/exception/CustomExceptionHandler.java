@@ -1,6 +1,6 @@
-package com.imooc.exception;
+package com.imooc.user.exception;
 
-import com.imooc.utils.IMOOCJSONResult;
+import com.imooc.pojo.IMOOCJSONResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;

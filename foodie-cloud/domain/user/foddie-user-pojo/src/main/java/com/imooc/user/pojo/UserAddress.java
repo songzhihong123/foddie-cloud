@@ -1,6 +1,5 @@
-package com.imooc.pojo;
+package com.imooc.user.pojo;
 
-import javax.persistence.*;
 import java.util.Date;
 
 @Table(name = "user_address")

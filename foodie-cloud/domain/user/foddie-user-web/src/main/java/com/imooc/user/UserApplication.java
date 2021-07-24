@@ -9,16 +9,16 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 //扫描 mybatis 通用mapper所在的包
-@MapperScan(basePackages = "com.imooc.item.mapper")
+@MapperScan(basePackages = "com.imooc.user.mapper")
 //@EnableTransactionManagement
 //扫描所有包以及相关组件包
 @ComponentScan(basePackages = {"com.imooc","org.n3r.idworker"})
 @EnableDiscoveryClient
 // TODO  fegin组件包
-public class ItemApplication {
+public class UserApplication {
 
     public static void main(String[] args){
-        SpringApplication.run(ItemApplication.class,args);
+        SpringApplication.run(UserApplication.class,args);
     }
 
 }

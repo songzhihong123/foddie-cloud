@@ -1,11 +1,16 @@
-package com.imooc.controller;
+package com.imooc.user.controller;
 
-import com.imooc.pojo.bo.ShopcartBO;
-import com.imooc.pojo.bo.UserBO;
-import com.imooc.pojo.Users;
-import com.imooc.pojo.vo.UsersVO;
-import com.imooc.service.UserService;
-import com.imooc.utils.*;
+import com.imooc.controller.BaseController;
+import com.imooc.pojo.IMOOCJSONResult;
+import com.imooc.pojo.ShopcartBO;
+import com.imooc.user.pojo.Users;
+import com.imooc.user.pojo.bo.UserBO;
+import com.imooc.user.pojo.vo.UsersVO;
+import com.imooc.user.service.UserService;
+import com.imooc.utils.CookieUtils;
+import com.imooc.utils.JsonUtils;
+import com.imooc.utils.MD5Utils;
+import com.imooc.utils.RedisOperator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +27,7 @@ import java.util.UUID;
 @Api(value = "注册登录",tags = {"用于注册登陆的相关接口"})
 @RestController
 @RequestMapping("passport")
-public class PassportController extends BaseController{
+public class PassportController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -142,6 +147,7 @@ public class PassportController extends BaseController{
     /**
      * 注册登录成功后，同步cookie和redis中购物车的数据
      */
+    // TODO 放到购物车模块
     private void synchShopcartData(String userId,HttpServletRequest request,HttpServletResponse response){
         /**
          * 1.redis无数据，cookie中的购物车为空，那么这个时候不做任何处理
@@ -221,6 +227,16 @@ public class PassportController extends BaseController{
         return userResult;
     }
 
+    public UsersVO conventUsersVO(Users userResult){
+        //实现用户的redis会话
+        String uniqueToken = UUID.randomUUID().toString().trim();
+        redisOperator.set(REDIS_USER_TOKEN + ":" + userResult.getId(),uniqueToken);
+
+        UsersVO usersVO = new UsersVO();
+        BeanUtils.copyProperties(userResult,usersVO);
+        usersVO.setUserUniqueToken(uniqueToken);
+        return usersVO;
+    }
 
 
 

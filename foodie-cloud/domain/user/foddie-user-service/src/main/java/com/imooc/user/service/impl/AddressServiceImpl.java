@@ -1,21 +1,21 @@
-package com.imooc.service.impl;
+package com.imooc.user.service.impl;
 
-import com.imooc.pojo.bo.AddressBO;
 import com.imooc.enums.YesOrNo;
-import com.imooc.mapper.UserAddressMapper;
-import com.imooc.pojo.UserAddress;
-import com.imooc.service.AddressService;
-import org.n3r.idworker.Sid;
+import com.imooc.org.n3r.idworker.Sid;
+import com.imooc.user.mapper.UserAddressMapper;
+import com.imooc.user.pojo.UserAddress;
+import com.imooc.user.pojo.bo.AddressBO;
+import com.imooc.user.service.AddressService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
 
-@Service
+@RestController
 public class AddressServiceImpl implements AddressService {
 
     @Autowired

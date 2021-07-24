@@ -1,22 +1,23 @@
-package com.imooc.service.impl;
+package com.imooc.user.service.impl;
 
-import com.imooc.pojo.bo.UserBO;
+
 import com.imooc.enums.Sex;
-import com.imooc.mapper.UsersMapper;
-import com.imooc.pojo.Users;
-import com.imooc.service.UserService;
+import com.imooc.org.n3r.idworker.Sid;
+import com.imooc.user.mapper.UsersMapper;
+import com.imooc.user.pojo.Users;
+import com.imooc.user.pojo.bo.UserBO;
+import com.imooc.user.service.UserService;
 import com.imooc.utils.DateUtil;
 import com.imooc.utils.MD5Utils;
-import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.Date;
 
-@Service
+@RestController
 public class UserServiceImpl implements UserService {
 
     @Autowired

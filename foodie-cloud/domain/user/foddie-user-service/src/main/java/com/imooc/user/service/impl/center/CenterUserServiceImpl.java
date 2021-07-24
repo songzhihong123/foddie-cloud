@@ -1,18 +1,19 @@
-package com.imooc.service.impl.center;
+package com.imooc.user.service.impl.center;
 
-import com.imooc.pojo.bo.center.CenterUsersBO;
-import com.imooc.mapper.UsersMapper;
-import com.imooc.pojo.Users;
-import com.imooc.service.center.CenterUserService;
+
+import com.imooc.user.mapper.UsersMapper;
+import com.imooc.user.pojo.Users;
+import com.imooc.user.pojo.bo.center.CenterUsersBO;
+import com.imooc.user.service.center.CenterUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 
-@Service
+@RestController
 public class CenterUserServiceImpl implements CenterUserService {
 
     @Autowired

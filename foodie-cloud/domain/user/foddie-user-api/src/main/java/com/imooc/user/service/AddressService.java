@@ -1,10 +1,12 @@
-package com.imooc.service;
+package com.imooc.user.service;
 
-import com.imooc.pojo.bo.AddressBO;
-import com.imooc.pojo.UserAddress;
+import com.imooc.user.pojo.UserAddress;
+import com.imooc.user.pojo.bo.AddressBO;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequestMapping("address-api")
 public interface AddressService {
 
 
@@ -13,21 +15,15 @@ public interface AddressService {
      * @param userId
      * @return
      */
-    public List<UserAddress> queryAll(String userId);
-
-    /**
-     * 根据用户iD和地址ID查询具体的用户地址信息
-     * @param userId
-     * @param addressId
-     * @return
-     */
-    public UserAddress queryUserAddress(String userId,String addressId);
+    @GetMapping("addressList")
+    public List<UserAddress> queryAll(@RequestParam("userId") String userId);
 
     /**
      * 用户新增收获地址列表.
      * @param addressBO
      */
-    public void addNewUserAddress(AddressBO addressBO);
+    @PutMapping("new-address")
+    public void addNewUserAddress(@RequestBody AddressBO addressBO);
 
 
 
@@ -35,7 +31,8 @@ public interface AddressService {
      * 用户修改 收获地址列表.
      * @param addressBO
      */
-    public void updateUserAddress(AddressBO addressBO);
+    @PutMapping("address")
+    public void updateUserAddress(@RequestBody AddressBO addressBO);
 
 
     /**
@@ -43,7 +40,9 @@ public interface AddressService {
      * @param userId
      * @param addressId
      */
-    public void deleteUserAddress(String userId,String addressId);
+    @DeleteMapping("address")
+    public void deleteUserAddress(@RequestParam("userId") String userId,
+                                  @RequestParam("addressId") String addressId);
 
 
     /**
@@ -51,8 +50,18 @@ public interface AddressService {
      * @param userId
      * @param addressId
      */
-    public void updateUserAddressToBeDefault(String userId,String addressId);
+    @PostMapping("setDefaultAddress")
+    public void updateUserAddressToBeDefault(@RequestParam("userId") String userId,
+                                             @RequestParam("addressId") String addressId);
 
-
+    /**
+     * 根据用户id和地址id，查询具体的用户地址对象信息
+     * @param userId
+     * @param addressId
+     * @return
+     */
+    @GetMapping("queryUserAddres")
+    public UserAddress queryUserAddress(@RequestParam("userId") String userId,
+                                        @RequestParam(value = "addressId" , required = false) String addressId);
 
 }

@@ -1,20 +1,22 @@
-package com.imooc.center;
+package com.imooc.user.controller.center;
 
-import com.imooc.pojo.bo.center.CenterUsersBO;
 import com.imooc.controller.BaseController;
-import com.imooc.pojo.Users;
-import com.imooc.pojo.vo.UsersVO;
-import com.imooc.resource.FileUpload;
-import com.imooc.service.center.CenterUserService;
+import com.imooc.user.pojo.Users;
+import com.imooc.user.pojo.bo.center.CenterUsersBO;
+import com.imooc.user.pojo.vo.UsersVO;
+import com.imooc.user.resource.FileUpload;
+import com.imooc.user.service.center.CenterUserService;
 import com.imooc.utils.CookieUtils;
 import com.imooc.utils.DateUtil;
-import com.imooc.utils.IMOOCJSONResult;
+import com.imooc.pojo.IMOOCJSONResult;
 import com.imooc.utils.JsonUtils;
+import com.imooc.utils.RedisOperator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -31,6 +33,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Api(value = "用户信息接口",tags = {"用户信息相关接口"})
 @RestController
@@ -199,6 +202,21 @@ public class CenterUserController extends BaseController {
         userResult.setUpdatedTime(null);
         userResult.setBirthday(null);
         return userResult;
+    }
+
+    @Autowired
+    private RedisOperator redisOperator;
+
+
+    public UsersVO conventUsersVO(Users userResult){
+        //实现用户的redis会话
+        String uniqueToken = UUID.randomUUID().toString().trim();
+        redisOperator.set(REDIS_USER_TOKEN + ":" + userResult.getId(),uniqueToken);
+
+        UsersVO usersVO = new UsersVO();
+        BeanUtils.copyProperties(userResult,usersVO);
+        usersVO.setUserUniqueToken(uniqueToken);
+        return usersVO;
     }
 
 
