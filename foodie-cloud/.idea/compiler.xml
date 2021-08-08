@@ -28,5 +28,10 @@
         <module name="foddie-user-web" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="foddie-cart-api" target="1.8" />
+      <module name="foddie-cart-service" target="1.8" />
+      <module name="foddie-cart-web" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

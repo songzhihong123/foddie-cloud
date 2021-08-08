@@ -40,3 +40,32 @@ spring:
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+# Ribbon 全局配置,单位毫秒
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 3000
+#Ribbon 指定服务配置超时判定，优先级更高
+foddie-user-service:
+  ribbon:
+    ConnectTimeout: 1000
+    ReadTimeout: 3000
+    MaxAutoRetries: 1
+    MaxAutoRetriesNextServer: 2
+    OkToRetryOnAllOperations: true
+
+#Feign的超时判定，优先级高于Ribbon
+feign:
+  client:
+    config:
+      # 全局默认配置
+      default:
+        connectTimeout: 1000
+        readTimeout: 3000
+      # 优先级比上面的高
+      foddie-user-service:
+        connectTimeout: 1000
+        readTimeout: 5000
+
+

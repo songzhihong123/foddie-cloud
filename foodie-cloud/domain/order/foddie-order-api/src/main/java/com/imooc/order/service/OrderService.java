@@ -4,9 +4,10 @@ package com.imooc.order.service;
 import com.imooc.order.pojo.OrderStatus;
 import com.imooc.order.pojo.bo.PlaceOrderBO;
 import com.imooc.order.pojo.vo.OrderVO;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-
+@FeignClient("foddie-order-service")
 @RequestMapping("order-api")
 public interface OrderService {
 

@@ -1,6 +1,7 @@
 package com.imooc.order.service.impl.center;
 
 import com.imooc.enums.YesOrNo;
+import com.imooc.item.service.ItemCommentsService;
 import com.imooc.order.mapper.OrderItemsMapper;
 import com.imooc.order.mapper.OrderStatusMapper;
 import com.imooc.order.mapper.OrdersMapper;
@@ -30,15 +31,8 @@ public class MyCommentsServiceImpl extends BaseService implements MyCommentsServ
     @Autowired
     private OrderItemsMapper orderItemsMapper;
 
-//    @Autowired
-//    private ItemsCommentsMapperCustom itemsCommentsMapperCustom;
-
-    // TOOD fengin 章节里改成item-api
     @Autowired
-    private LoadBalancerClient client;
-
-    @Autowired
-    private RestTemplate restTemplate;
+    public ItemCommentsService itemCommentsService;
 
     @Autowired
     private OrderStatusMapper orderStatusMapper;
@@ -69,10 +63,7 @@ public class MyCommentsServiceImpl extends BaseService implements MyCommentsServ
         Map<String,Object> map = new HashMap<>();
         map.put("userId",userId);
         map.put("commentList",commentList);
-//        itemsCommentsMapperCustom.saveComments(map);
-        ServiceInstance instance = client.choose("FODDIE-ITEM-SERVICE");
-        String url = String.format("http://%s:%s/item-comments-api/saveComments",instance.getHost(),instance.getPort());
-        restTemplate.postForLocation(url,map);
+        itemCommentsService.saveComments(map);
         //2.修改订单表为已评价
         Orders orders = new Orders();
         orders.setId(orderId);

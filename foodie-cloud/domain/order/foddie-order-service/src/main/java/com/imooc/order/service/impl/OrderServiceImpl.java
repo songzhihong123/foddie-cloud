@@ -4,6 +4,7 @@ import com.imooc.enums.OrderStatusEnum;
 import com.imooc.enums.YesOrNo;
 import com.imooc.item.pojo.Items;
 import com.imooc.item.pojo.ItemsSpec;
+import com.imooc.item.service.ItemService;
 import com.imooc.order.mapper.OrderItemsMapper;
 import com.imooc.order.mapper.OrderStatusMapper;
 import com.imooc.order.mapper.OrdersMapper;
@@ -18,16 +19,12 @@ import com.imooc.order.pojo.bo.SubmitOrderBO;
 import com.imooc.order.pojo.vo.MerchantOrdersVO;
 import com.imooc.order.pojo.vo.OrderVO;
 import com.imooc.user.pojo.UserAddress;
-//import com.imooc.item.service.ItemService;
-//import com.imooc.user.service.AddressService;
+import com.imooc.user.service.AddressService;
 import com.imooc.utils.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,20 +45,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderStatusMapper orderStatusMapper;
 
-
-
-    //TODO 学了Fegin再来把注释打开
-//    @Autowired
-//    private AddressService addressService;
-//
-//    @Autowired
-//    private ItemService itemService;
+    @Autowired
+    private AddressService addressService;
 
     @Autowired
-    private LoadBalancerClient client;
+    private ItemService itemService;
 
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Transactional(propagation = Propagation.REQUIRED)
     @Override
@@ -78,12 +67,7 @@ public class OrderServiceImpl implements OrderService {
         Integer postAmount = 0;
 
         String orderId = sid.nextShort();
-        // FIXME 等待fegin章节再来简化
-//        UserAddress userAddress = addressService.queryUserAddress(userId, addressId);
-        ServiceInstance instance = client.choose("FODDIE-USER-SERVICE");
-        String url = String.format("http://%s:%s/address-api/queryAddres" + "?userId=%s&addressId=%s",
-                instance.getHost(),instance.getPort(),userId,addressId);
-        UserAddress userAddress = restTemplate.getForObject(url,UserAddress.class);
+        UserAddress userAddress = addressService.queryUserAddress(userId, addressId);
 
         //1.新订单数据保存
         Orders newOrder = new Orders();
@@ -119,30 +103,14 @@ public class OrderServiceImpl implements OrderService {
 
 
             //2.1.更具规格id查询规格的具体信息，主要获取价格
-            // FIXME 等待fegin章节再来简化
-//            ItemsSpec itemsSpec = itemService.queryItemSpecById(itemSpecId);
-            ServiceInstance itemInstance = client.choose("FODDIE-ITEM-SERVICE");
-            String url1 = String.format("http://%s:%s/item-api/singleItemSpec" + "?specId=%s",
-                    itemInstance.getHost(),itemInstance.getPort(),itemSpecId);
-            ItemsSpec itemsSpec = restTemplate.getForObject(url1,ItemsSpec.class);
+            ItemsSpec itemsSpec = itemService.queryItemSpecById(itemSpecId);
 
             totalAmount += itemsSpec.getPriceNormal() * buyCounts;
             realPayAmount += itemsSpec.getPriceDiscount() * buyCounts;
             //2.2.根据商品ID获取商品信息和商品图片
             String itemId = itemsSpec.getItemId();
-            // FIXME 等待fegin章节再来简化
-//            Items items = itemService.queryItemById(itemId);
-            // FIXME 等待fegin章节再来简化
-//            String imgUrl = itemService.queryItemMainImgById(itemId);
-
-            url = String.format("http://%s:%s/item-api/item" + "?itemId=%s",
-                    itemInstance.getHost(),itemInstance.getPort(),itemId);
-            Items items = restTemplate.getForObject(url,Items.class);
-
-            url = String.format("http://%s:%s/item-api/primaryImage" + "?itemId=%s",
-                    itemInstance.getHost(),itemInstance.getPort(),itemId);
-            String imgUrl = restTemplate.getForObject(url,String.class);
-
+            Items items = itemService.queryItemById(itemId);
+            String imgUrl = itemService.queryItemMainImgById(itemId);
             String subOrderId = sid.nextShort();
             //2.3循环保存子订单数据到数据库
             OrderItems subOrderItem = new OrderItems();
@@ -156,17 +124,8 @@ public class OrderServiceImpl implements OrderService {
             subOrderItem.setItemSpecName(itemsSpec.getName());
             subOrderItem.setPrice(itemsSpec.getPriceDiscount());
             orderItemsMapper.insert(subOrderItem);
-            // FIXME 等待fegin章节再来简化
             //2.4 在用户提交订单以后规格表中需要扣除库存
-//            itemService.decreaseItemSpecStock(itemSpecId,buyCounts);
-
-            String url4 = String.format("http://%s:%s/item-api/decreaseStock",
-                    itemInstance.getHost(),itemInstance.getPort(),itemSpecId,buyCounts);
-
-            restTemplate.postForLocation(url4,itemSpecId,buyCounts);
-
-
-
+            itemService.decreaseItemSpecStock(itemSpecId,buyCounts);
         }
         newOrder.setTotalAmount(totalAmount);
         newOrder.setRealPayAmount(realPayAmount);

@@ -2,10 +2,10 @@ package com.imooc.order.controller.center;
 
 import com.imooc.controller.BaseController;
 import com.imooc.enums.YesOrNo;
+import com.imooc.item.service.ItemCommentsService;
 import com.imooc.order.pojo.OrderItems;
 import com.imooc.order.pojo.Orders;
 import com.imooc.order.pojo.bo.center.OrderItemsCommentBO;
-import com.imooc.order.service.OrderService;
 import com.imooc.order.service.center.MyCommentsService;
 import com.imooc.order.service.center.MyOrdersService;
 import com.imooc.pojo.IMOOCJSONResult;
@@ -15,11 +15,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -32,14 +29,10 @@ public class MyCommentsController extends BaseController {
     private MyCommentsService myCommentsService;
 
     @Autowired
+    private ItemCommentsService itemCommentsService;
+
+    @Autowired
     private MyOrdersService myOrdersService;
-
-    @Autowired
-    private LoadBalancerClient client;
-
-    @Autowired
-    private RestTemplate restTemplate;
-
 
     @ApiOperation(value = "查询订单列表",notes = "查询订单列表",httpMethod = "POST")
     @PostMapping("/pending")
@@ -109,14 +102,7 @@ public class MyCommentsController extends BaseController {
             pageSize = COMMON_PAGE_SIZE;
         }
 
-
-        //TODO 前方施工，学完Fegin再来改造
-//        PagedGridResult gridResult = myCommentsService.queryMyComments(userId,page,pageSize);
-
-        ServiceInstance instance = client.choose("FODDIE-ITEM-SERVICE");
-        String url = String.format("http://%s:%s/item-comments-api/myConnents" + "?userId=%s&page=%s&pageSize=%s",
-                instance.getHost(),instance.getPort(),userId,page,pageSize);
-        PagedGridResult gridResult = restTemplate.getForObject(url,PagedGridResult.class);
+        PagedGridResult gridResult = itemCommentsService.queryMyComments(userId,page,pageSize);
 
         return IMOOCJSONResult.ok(gridResult);
     }
